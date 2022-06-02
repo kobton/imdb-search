@@ -10,10 +10,17 @@ public class Imdb {
     private long id;
     @Column(name = "title")
     private String title;
-    @Column(name = "description")
-    private String descrition;
-    @Column(name = "published")
-    private boolean published;
+    @Column(name = "genres")
+    private String genres;
+
+    public Imdb() {
+    }
+
+    public Imdb(long id, String title, String genres) {
+        this.id = id;
+        this.title = title;
+        this.genres = genres;
+    }
 
     public long getId() {
         return id;
@@ -31,29 +38,20 @@ public class Imdb {
         this.title = title;
     }
 
-    public String getDescrition() {
-        return descrition;
+    public String getGenres() {
+        return genres;
     }
 
-    public void setDescrition(String descrition) {
-        this.descrition = descrition;
+    public void setGenres(String genres) {
+        this.genres = genres;
     }
 
-    public boolean isPublished() {
-        return published;
-    }
-
-    public void setPublished(boolean published) {
-        this.published = published;
-    }
-
-    @java.lang.Override
-    public java.lang.String toString() {
-        return "ImdbModel{" +
+    @Override
+    public String toString() {
+        return "Imdb{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", descrition='" + descrition + '\'' +
-                ", published=" + published +
+                ", genres='" + genres + '\'' +
                 '}';
     }
 }
