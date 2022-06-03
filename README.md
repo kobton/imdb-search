@@ -5,5 +5,3 @@ podman exec -it fa578c6b2eb1 bash
 podman logs --follow=true fa578c6b2eb1
 
 psql -U postgres postgres
-
-https://towardsdatascience.com/how-to-run-postgresql-and-pgadmin-using-docker-3a6a8ae918b5
