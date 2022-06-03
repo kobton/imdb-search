@@ -5,3 +5,5 @@ podman exec -it fa578c6b2eb1 bash
 podman logs --follow=true fa578c6b2eb1
 
 psql -U postgres postgres
+
+\d movies
