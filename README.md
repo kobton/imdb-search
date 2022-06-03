@@ -1,9 +1,16 @@
-podman run --name my-postgres -e POSTGRES_PASSWORD=mysecretpassword -e POSTGRES_USER=postgres -e POSTGRES_DB=postgres -d -p 5432:5432  docker.io/postgres:9.4 
+###Initialize DB with podman
 
-podman exec -it fa578c6b2eb1 bash
+Start podman
+```podman machine start```
 
-podman logs --follow=true fa578c6b2eb1
+Pull and run PostgresDB
+```podman run --name my-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432  docker.io/postgres:9.4```
 
-psql -U postgres postgres
+Bash into container
+```podman exec -it fa578c6b2eb1 bash```
 
-\d movies
+Create default user and db
+```psql -U postgres postgres```
+
+List DB content
+```\d movies```
