@@ -12,6 +12,8 @@ public class Imdb {
     private String title;
     @Column(name = "genres")
     private String genres;
+    @Column(name = "published")
+    private boolean published;
 
     public Imdb() {
     }
@@ -20,6 +22,21 @@ public class Imdb {
         this.id = id;
         this.title = title;
         this.genres = genres;
+    }
+
+    public Imdb(long id, String title, String genres, boolean published) {
+        this.id = id;
+        this.title = title;
+        this.genres = genres;
+        this.published = published;
+    }
+
+    public boolean isPublished() {
+        return published;
+    }
+
+    public void setPublished(boolean published) {
+        this.published = published;
     }
 
     public long getId() {
@@ -52,6 +69,7 @@ public class Imdb {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", genres='" + genres + '\'' +
+                ", published=" + published +
                 '}';
     }
 }
