@@ -42,4 +42,55 @@ public class ImdbController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping("/movies/{id}")
+    public ResponseEntity<Imdb> getMoviesById(@PathVariable("id") long id) {
+        Optional<Imdb> moviesData = imdbRepository.findById(id);
+        if (moviesData.isPresent()) {
+            return new ResponseEntity<>(moviesData.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    @PostMapping("/movies")
+    public ResponseEntity<Imdb> createMovie(@RequestBody Imdb imdb) {
+        try {
+            Imdb _imdb = imdbRepository
+                    .save(new Imdb(imdb.getTitle(), imdb.getGenres(), imdb.getYear()));
+            return new ResponseEntity<>(_imdb, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @PutMapping("/movies/{id}")
+    public ResponseEntity<Imdb> updateMovie(@PathVariable("id") long id, @RequestBody Imdb imdb) {
+        Optional<Imdb> tutorialData = imdbRepository.findById(id);
+        if (tutorialData.isPresent()) {
+            Imdb _imdb = tutorialData.get();
+            _imdb.setTitle(imdb.getTitle());
+            _imdb.setYear(imdb.getYear());
+            _imdb.setGenres(imdb.getGenres());
+
+            return new ResponseEntity<>(imdbRepository.save(_imdb), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    @DeleteMapping("/movies/{id}")
+    public ResponseEntity<HttpStatus> deleteMovie(@PathVariable("id") long id) {
+        try {
+            imdbRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @DeleteMapping("/movies")
+    public ResponseEntity<HttpStatus> deleteAllMovies() {
+        try {
+            imdbRepository.deleteAll();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     }

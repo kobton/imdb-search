@@ -16,7 +16,10 @@ Create default user and db
 ```psql -U postgres postgres```
 
 List DB content
+
 ```\d movies```
+
+```SELECT * FROM movies;```
 
 Run maven project
 ```mvn spring-boot:run```

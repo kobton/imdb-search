@@ -12,39 +12,20 @@ public class Imdb {
     private String title;
     @Column(name = "genres")
     private String genres;
-    @Column(name = "published")
-    private boolean published;
+    @Column(name = "year")
+    private String year;
 
     public Imdb() {
     }
 
-    public Imdb(long id, String title, String genres) {
-        this.id = id;
+    public Imdb(String title, String genres, String year) {
         this.title = title;
         this.genres = genres;
-    }
-
-    public Imdb(long id, String title, String genres, boolean published) {
-        this.id = id;
-        this.title = title;
-        this.genres = genres;
-        this.published = published;
-    }
-
-    public boolean isPublished() {
-        return published;
-    }
-
-    public void setPublished(boolean published) {
-        this.published = published;
+        this.year = year;
     }
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -63,13 +44,21 @@ public class Imdb {
         this.genres = genres;
     }
 
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
     @Override
     public String toString() {
         return "Imdb{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", genres='" + genres + '\'' +
-                ", published=" + published +
+                ", year=" + year +
                 '}';
     }
 }
