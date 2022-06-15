@@ -4,7 +4,6 @@ import com.example.imdbsearch.model.Imdb;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,7 +24,7 @@ public class TSVReader {
 
             while (line != null){
 
-                String[] attributes = line.split("  ");
+                String[] attributes = line.split("\t");
 
                 Imdb imdb = createImdb(attributes);
 
@@ -43,9 +42,9 @@ public class TSVReader {
     }
 
     public static Imdb createImdb (String[] attributes) {
-        String title = attributes[6];
-        String genres = attributes[13];
-        String year = attributes[11];
+        String title = attributes[2];
+        String genres = attributes[8];
+        String year = attributes[5];
 
         return new Imdb(title, genres, year);
 

@@ -14,7 +14,7 @@ class TSVReaderTest {
     void readTSV() {
        List<Imdb> movies = new ArrayList<>();
        movies =TSVReader.readTSV("sample.tsv");
-       System.out.println(movies.get(7));
+       System.out.println(movies.get(16));
     }
 
     @Test
