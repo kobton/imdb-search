@@ -54,7 +54,7 @@ public class Imdb {
 
     @Override
     public String toString() {
-        return "Imdb{" +
+        return "Imdb {" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", genres='" + genres + '\'' +

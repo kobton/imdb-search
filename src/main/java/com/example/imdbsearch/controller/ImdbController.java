@@ -3,6 +3,8 @@ package com.example.imdbsearch.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import com.example.imdbsearch.importer.TSVReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -89,6 +91,19 @@ public class ImdbController {
         try {
             imdbRepository.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @PostMapping("/movies/import")
+    public ResponseEntity<HttpStatus> importMovies() {
+
+        try {
+            List<Imdb> movies = TSVReader.readTSV("sample.tsv");
+            for (Imdb m : movies) {
+                imdbRepository.save(m);
+            }
+            return new ResponseEntity<HttpStatus>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
