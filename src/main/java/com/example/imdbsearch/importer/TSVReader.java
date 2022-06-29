@@ -16,8 +16,6 @@ public class TSVReader {
         List<Imdb> movies = new ArrayList<>();
         Path pathToFile = Paths.get(fileName);
 
-        // create an instance of BufferedReader
-
         try (BufferedReader br = Files.newBufferedReader(pathToFile))  {
             String line = br.readLine();
 

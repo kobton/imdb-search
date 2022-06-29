@@ -28,14 +28,32 @@ import com.example.imdbsearch.repository.ImdbRepository;
 public class ImdbController {
     @Autowired
     ImdbRepository imdbRepository;
+
+    @PostMapping("/movies/import")
+    public ResponseEntity<HttpStatus> importMovies() {
+
+        try {
+            List<Imdb> movies = TSVReader.readTSV("sample.tsv");
+            for (Imdb m : movies) {
+                imdbRepository.save(m);
+            }
+            return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     @GetMapping("/movies")
-    public ResponseEntity<List<Imdb>> getAllMovies(@RequestParam(required = false) String title) {
+    public ResponseEntity<List<Imdb>> getAllMovies(@RequestParam(required = false) String title, String genres, String year) {
         try {
             List<Imdb> movies = new ArrayList<Imdb>();
-            if (title == null)
+            if (title == null && genres == null)
                 imdbRepository.findAll().forEach(movies::add);
-            else
+            else if (title != null)
                 imdbRepository.findByTitleContaining(title).forEach(movies::add);
+            else if (genres != null)
+                imdbRepository.findByGenresContaining(genres).forEach(movies::add);
+            else if (year != null)
+                imdbRepository.findByYearContaining(year).forEach(movies::add);
             if (movies.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -95,17 +113,8 @@ public class ImdbController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PostMapping("/movies/import")
-    public ResponseEntity<HttpStatus> importMovies() {
-
-        try {
-            List<Imdb> movies = TSVReader.readTSV("sample.tsv");
-            for (Imdb m : movies) {
-                imdbRepository.save(m);
-            }
-            return new ResponseEntity<HttpStatus>(HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+    /** @GetMapping("/movies/test")
+    public List<Imdb> findByTitle(@RequestParam String search) {
+        return imdbRepository.search(search);
+    }**/
     }
