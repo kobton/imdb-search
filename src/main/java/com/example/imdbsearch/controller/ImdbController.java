@@ -113,8 +113,8 @@ public class ImdbController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    /** @GetMapping("/movies/test")
+     @GetMapping("/movies/search")
     public List<Imdb> findByTitle(@RequestParam String search) {
         return imdbRepository.search(search);
-    }**/
+    }
     }
