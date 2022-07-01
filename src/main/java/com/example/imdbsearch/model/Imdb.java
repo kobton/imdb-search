@@ -8,6 +8,8 @@ public class Imdb {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Column(name = "type")
+    private String type;
     @Column(name = "title")
     private String title;
     @Column(name = "genres")
@@ -18,10 +20,23 @@ public class Imdb {
     public Imdb() {
     }
 
-    public Imdb(String title, String genres, String year) {
+    public Imdb(String type, String title, String genres, String year) {
+        this.type = type;
         this.title = title;
         this.genres = genres;
         this.year = year;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public long getId() {

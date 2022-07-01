@@ -14,6 +14,6 @@ public interface ImdbRepository extends CrudRepository<Imdb, Long> {
 
 
     @Query("SELECT o FROM Imdb o WHERE fts(:title) = true")
-    List<Imdb> search(@Param("title") String title);
+    List<Imdb> searchTitle(@Param("title") String title);
 
 }

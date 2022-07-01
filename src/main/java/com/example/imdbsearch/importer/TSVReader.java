@@ -24,13 +24,15 @@ public class TSVReader {
 
                 String[] attributes = line.split("\t");
 
-                Imdb imdb = createImdb(attributes);
+                if (!attributes[0].equals("tconst")){
 
-                movies.add(imdb);
+                    Imdb imdb = createImdb(attributes);
+
+                    movies.add(imdb);
+
+                }
 
                 line = br.readLine();
-
-
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -40,11 +42,12 @@ public class TSVReader {
     }
 
     public static Imdb createImdb (String[] attributes) {
+        String type = attributes[1];
         String title = attributes[2];
         String genres = attributes[8];
         String year = attributes[5];
 
-        return new Imdb(title, genres, year);
+        return new Imdb(type, title, genres, year);
 
 
     }

@@ -75,7 +75,7 @@ public class ImdbController {
     public ResponseEntity<Imdb> createMovie(@RequestBody Imdb imdb) {
         try {
             Imdb _imdb = imdbRepository
-                    .save(new Imdb(imdb.getTitle(), imdb.getGenres(), imdb.getYear()));
+                    .save(new Imdb(imdb.getTitle(), imdb.getGenres(), imdb.getYear(), imdb.getType()));
             return new ResponseEntity<>(_imdb, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -114,7 +114,11 @@ public class ImdbController {
         }
     }
      @GetMapping("/movies/search")
-    public List<Imdb> findByTitle(@RequestParam String search) {
-        return imdbRepository.search(search);
+    public ResponseEntity<List<Imdb>> findByTitle(@RequestParam String search) {
+        try {
+            return new ResponseEntity<List<Imdb>>(imdbRepository.searchTitle(search), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     }
