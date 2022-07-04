@@ -13,7 +13,7 @@ import java.util.List;
 public class TSVReader {
 
     public static List<Imdb> readTSV(String fileName) {
-        List<Imdb> movies = new ArrayList<>();
+        List<Imdb> entries = new ArrayList<>();
         Path pathToFile = Paths.get(fileName);
 
         try (BufferedReader br = Files.newBufferedReader(pathToFile))  {
@@ -28,7 +28,7 @@ public class TSVReader {
 
                     Imdb imdb = createImdb(attributes);
 
-                    movies.add(imdb);
+                    entries.add(imdb);
 
                 }
 
@@ -38,7 +38,7 @@ public class TSVReader {
             ioe.printStackTrace();
         }
 
-        return movies;
+        return entries;
     }
 
     public static Imdb createImdb (String[] attributes) {

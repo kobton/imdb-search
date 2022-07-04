@@ -1,4 +1,4 @@
-package com.example.imdbsearch.fts;
+package com.example.imdbsearch.repository;
 
 import org.hibernate.boot.MetadataBuilder;
 import org.hibernate.boot.spi.MetadataBuilderContributor;

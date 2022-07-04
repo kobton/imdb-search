@@ -3,7 +3,7 @@ package com.example.imdbsearch.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="movies")
+@Table(name="imdb")
 public class Imdb {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

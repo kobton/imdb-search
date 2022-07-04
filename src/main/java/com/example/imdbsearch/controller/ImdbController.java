@@ -113,7 +113,7 @@ public class ImdbController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-     @GetMapping("/movies/search")
+    @GetMapping("/movies/search")
     public ResponseEntity<List<Imdb>> findByTitle(@RequestParam String search) {
         try {
             return new ResponseEntity<List<Imdb>>(imdbRepository.searchTitle(search), HttpStatus.OK);
@@ -121,4 +121,20 @@ public class ImdbController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping("/movies/movies")
+    public ResponseEntity<List<Imdb>> getMovies(){
+        /** try {
+            return new ResponseEntity<List<Imdb>>(imdbRepository.getMovies(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } **/
+
+        try {
+         return new ResponseEntity<List<Imdb>>(imdbRepository.findByTypeContaining("movie"), HttpStatus.OK);
+         } catch (Exception e) {
+         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+         }
+
     }
+    }
+
