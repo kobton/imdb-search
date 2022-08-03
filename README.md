@@ -1,4 +1,23 @@
-###Initialize DB with podman
+#IMDB-Search
+
+##Design
+Spring boot application built with Maven. REST API to import data from a TSV file and store it in a Postgres database. Other API calls includes getting the the data as json payload and query the database for specific database entries. Interaction with the database is done using the Java Persistence API.
+
+Full text search has been implemented utilizing the built in operators of the Postgres database.
+
+##Usage and Implementation
+
+Import the IMDB data from TSV file ```POST /api/imdb/import```
+
+Get all IMDB entries ```GET /api/imdb```
+
+Delete all IMDB entries ```DELETE /api/imdb```
+
+Do a title full text search ```POST api/imdb/search?search=searchterm```
+
+##Execution
+
+Initialize DB with podman
 
 Start podman
 ```podman machine start```

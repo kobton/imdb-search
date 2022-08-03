@@ -29,7 +29,7 @@ public class ImdbController {
     @Autowired
     ImdbRepository imdbRepository;
 
-    @PostMapping("/movies/import")
+    @PostMapping("/imdb/import")
     public ResponseEntity<HttpStatus> importMovies() {
 
         try {
@@ -42,7 +42,7 @@ public class ImdbController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("/movies")
+    @GetMapping("/imdb")
     public ResponseEntity<List<Imdb>> getAllMovies(@RequestParam(required = false) String title, String genres, String year) {
         try {
             List<Imdb> movies = new ArrayList<Imdb>();
@@ -62,7 +62,7 @@ public class ImdbController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("/movies/{id}")
+    @GetMapping("/imdb/{id}")
     public ResponseEntity<Imdb> getMoviesById(@PathVariable("id") long id) {
         Optional<Imdb> moviesData = imdbRepository.findById(id);
         if (moviesData.isPresent()) {
@@ -71,7 +71,7 @@ public class ImdbController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @PostMapping("/movies")
+    @PostMapping("/imdb")
     public ResponseEntity<Imdb> createMovie(@RequestBody Imdb imdb) {
         try {
             Imdb _imdb = imdbRepository
@@ -81,7 +81,7 @@ public class ImdbController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PutMapping("/movies/{id}")
+    @PutMapping("/imdb/{id}")
     public ResponseEntity<Imdb> updateMovie(@PathVariable("id") long id, @RequestBody Imdb imdb) {
         Optional<Imdb> tutorialData = imdbRepository.findById(id);
         if (tutorialData.isPresent()) {
@@ -95,7 +95,7 @@ public class ImdbController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @DeleteMapping("/movies/{id}")
+    @DeleteMapping("/imdb/{id}")
     public ResponseEntity<HttpStatus> deleteMovie(@PathVariable("id") long id) {
         try {
             imdbRepository.deleteById(id);
@@ -104,7 +104,7 @@ public class ImdbController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @DeleteMapping("/movies")
+    @DeleteMapping("/imdb")
     public ResponseEntity<HttpStatus> deleteAllMovies() {
         try {
             imdbRepository.deleteAll();
@@ -113,7 +113,7 @@ public class ImdbController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("/movies/search")
+    @GetMapping("/imdb/search")
     public ResponseEntity<List<Imdb>> findByTitle(@RequestParam String search) {
         try {
             return new ResponseEntity<List<Imdb>>(imdbRepository.searchTitle(search), HttpStatus.OK);
@@ -121,7 +121,7 @@ public class ImdbController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("/movies/movies")
+    @GetMapping("/imdb/movies")
     public ResponseEntity<List<Imdb>> getMovies(){
         /** try {
             return new ResponseEntity<List<Imdb>>(imdbRepository.getMovies(), HttpStatus.OK);
