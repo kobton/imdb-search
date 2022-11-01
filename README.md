@@ -33,7 +33,7 @@ Pull and run PostgresDB
 ```docker run --name my-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432  docker.io/postgres:9.4```
 
 List existing non-running
-```podman ps -a```
+```docker ps -a```
 
 Start container
 ```podman start my-postgres```
