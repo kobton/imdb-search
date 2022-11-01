@@ -30,7 +30,7 @@ If issues
 If connection SSH issues, recreate VM: https://github.com/containers/podman/issues/12728
 
 Pull and run PostgresDB
-```podman run --name my-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432  docker.io/postgres:9.4```
+```docker run --name my-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432  docker.io/postgres:9.4```
 
 List existing non-running
 ```podman ps -a```
