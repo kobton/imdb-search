@@ -22,7 +22,7 @@ Delete all IMDB entries ```DELETE /api/imdb```
 Initialize DB with podman
 
 Start podman
-```podman machine start``` and 
+```docker machine start``` and 
 
 If issues
 ```Get-Service vmcompute | Restart-Service``` in Powershell
@@ -36,10 +36,10 @@ List existing non-running
 ```docker ps -a```
 
 Start container
-```podman start my-postgres```
+```docker start my-postgres```
 
 Bash into container
-```podman exec -it d117521109ca bash```
+```docker exec -it d117521109ca bash```
 
 Create default user and db
 ```psql -U postgres postgres```
