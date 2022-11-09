@@ -36,7 +36,7 @@ public class ImdbController {
             for (Imdb m : movies) {
                 imdbRepository.save(m);
             }
-            return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -44,15 +44,15 @@ public class ImdbController {
     @GetMapping("/imdb")
     public ResponseEntity<List<Imdb>> getAllMovies(@RequestParam(required = false) String title, String genres, String year) {
         try {
-            List<Imdb> movies = new ArrayList<Imdb>();
-            if (title == null && genres == null)
-                imdbRepository.findAll().forEach(movies::add);
+            List<Imdb> movies = new ArrayList<>();
+            if (title == null && genres == null && year == null)
+                movies.addAll(imdbRepository.findAll());
             else if (title != null)
-                imdbRepository.findByTitleContaining(title).forEach(movies::add);
+                movies.addAll(imdbRepository.findByTitleContaining(title));
             else if (genres != null)
-                imdbRepository.findByGenresContaining(genres).forEach(movies::add);
-            else if (year != null)
-                imdbRepository.findByYearContaining(year).forEach(movies::add);
+                movies.addAll(imdbRepository.findByGenresContaining(genres));
+            else
+                movies.addAll(imdbRepository.findByYearContaining(year));
             if (movies.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -114,7 +114,7 @@ public class ImdbController {
     @GetMapping("/imdb/search")
     public ResponseEntity<List<Imdb>> findByTitle(@RequestParam String search) {
         try {
-            return new ResponseEntity<List<Imdb>>(imdbRepository.searchTitle(search), HttpStatus.OK);
+            return new ResponseEntity<>(imdbRepository.searchTitle(search), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -122,7 +122,7 @@ public class ImdbController {
     @GetMapping("/imdb/movies")
     public ResponseEntity<List<Imdb>> getMovies(){
         try {
-         return new ResponseEntity<List<Imdb>>(imdbRepository.findByTypeContaining("movie"), HttpStatus.OK);
+         return new ResponseEntity<>(imdbRepository.findByTypeContaining("movie"), HttpStatus.OK);
          } catch (Exception e) {
          return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
          }
