@@ -9,9 +9,7 @@ import java.util.List;
 
 @SpringBootApplication
 public class ImdbSearchApplication {
-
 	public static void main(String[] args) {
-
 		SpringApplication.run(ImdbSearchApplication.class, args);
 	}
 }

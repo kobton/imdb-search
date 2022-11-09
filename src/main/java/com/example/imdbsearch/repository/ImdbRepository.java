@@ -13,12 +13,6 @@ public interface ImdbRepository extends JpaRepository<Imdb, Long> {
     List<Imdb> findByTypeContaining(String type);
 
     //Implementing FTS with Postgres built in operators
-
     @Query("SELECT o FROM Imdb o WHERE fts(:title) = true")
     List<Imdb> searchTitle(@Param("title") String title);
-
-    // Alternative method from findByType Jpa method
-
-    @Query("FROM Imdb WHERE type='movie'")
-    List<Imdb> getMovies();
 }

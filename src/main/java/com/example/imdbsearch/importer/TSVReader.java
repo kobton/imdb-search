@@ -11,45 +11,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TSVReader {
-
     public static List<Imdb> readTSV(String fileName) {
         List<Imdb> entries = new ArrayList<>();
         Path pathToFile = Paths.get(fileName);
-
         try (BufferedReader br = Files.newBufferedReader(pathToFile))  {
             String line = br.readLine();
-
-
             while (line != null){
-
                 String[] attributes = line.split("\t");
-
                 if (!attributes[0].equals("tconst")){
-
                     Imdb imdb = createImdb(attributes);
-
                     entries.add(imdb);
-
                 }
-
                 line = br.readLine();
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-
         return entries;
     }
-
     public static Imdb createImdb (String[] attributes) {
         String type = attributes[1];
         String title = attributes[2];
         String genres = attributes[8];
         String year = attributes[5];
-
         return new Imdb(type, title, genres, year);
-
-
     }
 
 }

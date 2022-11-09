@@ -31,7 +31,6 @@ public class ImdbController {
 
     @PostMapping("/imdb/import")
     public ResponseEntity<HttpStatus> importMovies() {
-
         try {
             List<Imdb> movies = TSVReader.readTSV("sample.tsv");
             for (Imdb m : movies) {
@@ -89,7 +88,6 @@ public class ImdbController {
             _imdb.setTitle(imdb.getTitle());
             _imdb.setYear(imdb.getYear());
             _imdb.setGenres(imdb.getGenres());
-
             return new ResponseEntity<>(imdbRepository.save(_imdb), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -123,18 +121,11 @@ public class ImdbController {
     }
     @GetMapping("/imdb/movies")
     public ResponseEntity<List<Imdb>> getMovies(){
-        /** try {
-            return new ResponseEntity<List<Imdb>>(imdbRepository.getMovies(), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        } **/
-
         try {
          return new ResponseEntity<List<Imdb>>(imdbRepository.findByTypeContaining("movie"), HttpStatus.OK);
          } catch (Exception e) {
          return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
          }
-
     }
     }
 

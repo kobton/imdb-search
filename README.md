@@ -18,16 +18,8 @@ Do a title full text search ```POST api/imdb/search?search=searchterm```
 Delete all IMDB entries ```DELETE /api/imdb```
 
 ## Execution
-
-Initialize DB with podman
-
-Start podman
-```docker machine start``` and 
-
 If issues
 ```Get-Service vmcompute | Restart-Service``` in Powershell
-
-If connection SSH issues, recreate VM: https://github.com/containers/podman/issues/12728
 
 Pull and run PostgresDB
 ```docker run --name my-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432  docker.io/postgres:9.4```
@@ -46,7 +38,7 @@ Create default user and db
 
 List DB content
 
-```\d movies```
+```\d imdb```
 
 ```SELECT * FROM movies;```
 
