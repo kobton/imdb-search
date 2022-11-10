@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.imdbsearch.importer.TSVReader;
+import com.example.imdbsearch.service.ImdbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,14 +29,12 @@ import com.example.imdbsearch.repository.ImdbRepository;
 public class ImdbController {
     @Autowired
     ImdbRepository imdbRepository;
+    ImdbService imdbService;
 
     @PostMapping("/imdb/import")
     public ResponseEntity<HttpStatus> importMovies() {
         try {
-            List<Imdb> movies = TSVReader.readTSV("sample.tsv");
-            for (Imdb m : movies) {
-                imdbRepository.save(m);
-            }
+            imdbService.importer();
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -65,7 +64,7 @@ public class ImdbController {
     public ResponseEntity<Imdb> getMoviesById(@PathVariable("id") long id) {
         Optional<Imdb> moviesData = imdbRepository.findById(id);
         if (moviesData.isPresent()) {
-            return new ResponseEntity<>(moviesData.get(), HttpStatus.OK);
+            return new ResponseEntity<>(moviesData.get(), HttpStatus.OK);a
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
